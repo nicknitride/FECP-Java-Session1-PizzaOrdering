@@ -2,15 +2,6 @@ package org.example;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
-/*
-
-addOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, String pizzaType, int quantity)
-updateOrder(ArrayList<Integer> quantities, int index, int newQuantity)
-removeOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, int index)
-printOrders(ArrayList<String> pizzas, ArrayList<Integer> quantities)
-
- */
 public class Main {
     static void addOrder(ArrayList<String> pizzas, ArrayList<Integer> quantArray, String pizzaType, int quantity){
         if (zeroCheck(quantity)){
@@ -118,6 +109,5 @@ public class Main {
         printMenu();
         System.out.println(printOrders(pizzaOrderList,quantityList));
     }
-
     }
 }
