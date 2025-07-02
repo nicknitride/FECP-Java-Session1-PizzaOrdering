@@ -13,18 +13,27 @@ printOrders(ArrayList<String> pizzas, ArrayList<Integer> quantities)
  */
 public class Main {
     static void addOrder(ArrayList<String> pizzas, ArrayList<Integer> quantArray, String pizzaType, int quantity){
-        if(pizzas.contains(pizzaType)){//pizza already in memory
-            int existingPizzaIndex = pizzas.indexOf(pizzaType);
-            quantArray.set(existingPizzaIndex, quantity);
-            System.out.println("Pizza entry already exists, updating quantity instead");
-        }else{
-            pizzas.add(pizzaType);
-            quantArray.add(quantity);
+        if (zeroCheck(quantity)){
+            if(pizzas.contains(pizzaType)){//pizza already in memory
+                int existingPizzaIndex = pizzas.indexOf(pizzaType);
+                quantArray.set(existingPizzaIndex, quantity);
+                System.out.println("Pizza entry already exists, updating quantity instead");
+            }else{
+                pizzas.add(pizzaType);
+                quantArray.add(quantity);
+            }
+        }
+        else{
+            System.out.println("Quantity must be positive");
         }
     }
 
     static void updateOrder(ArrayList<Integer> quantities, int index, int newQuantity){
-        quantities.set(index - 1,newQuantity);
+        if (zeroCheck(newQuantity)){
+            quantities.set(index - 1,newQuantity);
+        }else{
+            System.out.println("Quantity must be positive");
+        }
     }
     static void removeOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, int index){
         pizzas.remove(index-1);
@@ -75,11 +84,7 @@ public class Main {
             System.out.print("Quantity: ");
             int quant = userIn.nextInt();
             userIn.nextLine();
-            if(zeroCheck(quant)){
-                addOrder(pizzaOrderList,quantityList,pizzaEntry,quant);
-            }else{
-                System.out.println("Quantity must be positive");
-            }
+            addOrder(pizzaOrderList,quantityList,pizzaEntry,quant);
         } else if (userChoice==2) {//Update
             System.out.println("-------Printing Orders for Convenience----------\n"+printOrders(pizzaOrderList,quantityList)+"\n-----------");
             System.out.print("Order number to update: ");
@@ -88,11 +93,7 @@ public class Main {
             System.out.print("New quantity: ");
             int quant = userIn.nextInt();
             userIn.nextLine();
-            if(zeroCheck(quant)){
-                updateOrder(quantityList, orderNum, quant);
-            }else{
-                System.out.println("Quantity must be positive");
-            }
+            updateOrder(quantityList, orderNum, quant);
         } else if (userChoice==3) {
             System.out.println("-------Printing Orders for Convenience----------\n"+printOrders(pizzaOrderList,quantityList)+"\n-----------");
             printOrders(pizzaOrderList,quantityList);
