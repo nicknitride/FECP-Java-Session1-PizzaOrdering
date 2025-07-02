@@ -29,15 +29,24 @@ public class Main {
     }
 
     static void updateOrder(ArrayList<Integer> quantities, int index, int newQuantity){
-        if (zeroCheck(newQuantity)){
-            quantities.set(index - 1,newQuantity);
-        }else{
-            System.out.println("Quantity must be positive");
-        }
+       try{
+           if (zeroCheck(newQuantity)){
+               quantities.set(index,newQuantity);
+           }else{
+               System.out.println("Quantity must be positive");
+           }
+       } catch (IndexOutOfBoundsException e) {
+           System.out.println("Index invalid");
+       }
     }
     static void removeOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, int index){
-        pizzas.remove(index-1);
-        quantities.remove(index-1);
+        try{
+            pizzas.remove(index);
+            quantities.remove(index);
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Index invalid");
+        }
+
     }
     static String printOrders(ArrayList<String> pizzas, ArrayList<Integer> quantities){
         String output = "--- Current Orders ---\n";
@@ -93,14 +102,14 @@ public class Main {
             System.out.print("New quantity: ");
             int quant = userIn.nextInt();
             userIn.nextLine();
-            updateOrder(quantityList, orderNum, quant);
+            updateOrder(quantityList, orderNum-1, quant);
         } else if (userChoice==3) {
             System.out.println("-------Printing Orders for Convenience----------\n"+printOrders(pizzaOrderList,quantityList)+"\n-----------");
             printOrders(pizzaOrderList,quantityList);
             System.out.print("Order number to remove: ");
             int orderIndex = userIn.nextInt();
             userIn.nextLine();
-            removeOrder(pizzaOrderList, quantityList, orderIndex);
+            removeOrder(pizzaOrderList, quantityList, orderIndex-1);
         } else if (userChoice==4) {
             System.out.println(printOrders(pizzaOrderList,quantityList));
         } else{
