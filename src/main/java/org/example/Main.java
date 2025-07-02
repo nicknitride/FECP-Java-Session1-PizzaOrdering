@@ -10,18 +10,6 @@ updateOrder(ArrayList<Integer> quantities, int index, int newQuantity)
 removeOrder(ArrayList<String> pizzas, ArrayList<Integer> quantities, int index)
 printOrders(ArrayList<String> pizzas, ArrayList<Integer> quantities)
 
-
-"Pepperoni"
-
-"Cheese"
-
-"Hawaiian"
-
-"Meat Lovers"
-
-"Veggie"
-
-"Supreme"
  */
 public class Main {
     static void addOrder(ArrayList<String> pizzas, ArrayList<Integer> quantArray, String pizzaType, int quantity){
@@ -58,9 +46,9 @@ public class Main {
         System.out.println("5. Exit");
     }
 
-
-
-
+    static boolean zeroCheck(int orderQuant){
+        return (orderQuant > 0);
+    }
     public static void main(String[] args) {
     ArrayList<String> pizzaOrderList = new ArrayList<>();
     ArrayList<Integer> quantityList = new ArrayList<>();
@@ -87,7 +75,11 @@ public class Main {
             System.out.print("Quantity: ");
             int quant = userIn.nextInt();
             userIn.nextLine();
-            addOrder(pizzaOrderList,quantityList,pizzaEntry,quant);
+            if(zeroCheck(quant)){
+                addOrder(pizzaOrderList,quantityList,pizzaEntry,quant);
+            }else{
+                System.out.println("Quantity must be positive");
+            }
         } else if (userChoice==2) {//Update
             System.out.println("-------Printing Orders for Convenience----------\n"+printOrders(pizzaOrderList,quantityList)+"\n-----------");
             System.out.print("Order number to update: ");
@@ -96,7 +88,11 @@ public class Main {
             System.out.print("New quantity: ");
             int quant = userIn.nextInt();
             userIn.nextLine();
-            updateOrder(quantityList, orderNum, quant);
+            if(zeroCheck(quant)){
+                updateOrder(quantityList, orderNum, quant);
+            }else{
+                System.out.println("Quantity must be positive");
+            }
         } else if (userChoice==3) {
             System.out.println("-------Printing Orders for Convenience----------\n"+printOrders(pizzaOrderList,quantityList)+"\n-----------");
             printOrders(pizzaOrderList,quantityList);
